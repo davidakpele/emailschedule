@@ -572,17 +572,17 @@ public function about(){
 
 # PROJECT SETUP
 
-### 1
+## 1
 > Download, unzip or clone the project file, base folder name is "assigment" but if you wish to change the name, NOTE-> when you change base name from "assignment" to "NEW_BASE_FOLDER_NAME" open the project file, go to public/.htaccess and look for "RewriteBase /assignment/public" and change from "assignment" to "NEW_BASE_FOLDER_NAME".
 
-### 2
+## 2
 > Database is MySQL and DB name is "cronjobs", if you want to make any changes, go to "baseFolder/app/.env" file and change "DB_NAME=cronjobs" to your new db name, if not please create DB named "cronjobs" then import the SQL TABLES from "baseFolder/app/db/cronjobs.sql file.
 
 
-### 3
+## 3
 > To enable Mailer, make sure you have composer installed in your system. To install Composer, the PHP dependency manager, follow these steps based on your operating system.
 
-#### Steps to Install Composer on Windows:
+## Steps to Install Composer on Windows:
 
 1. Download the Composer-Setup.exe file:
     * **Visit the official Composer website: https://getcomposer.org/download/.
@@ -628,3 +628,41 @@ composer require phpmailer/phpmailer
 3. Access Logout endpoint: http://localhost/assignment/auth/logout
 
 - Up one successful sign-up, and login, page will automatically redirect users to home page where they can schedule email notifications.
+
+## HOW TO SET UP CRONTAB
+
+- Crontab is for linux and unfortunately i use windows and i was able to achieve the same result with windows Task Schedule.
+
+- SET UP TASK SCHEDULE ON WINDOWS TO RUN PHP SCRIPT
+
+    1. Open Task Scheduler
+        * ** Open Task Scheduler on Windows by typing Task Scheduler into the search bar and selecting the result.
+    2.  Create a New Task
+        * ** In the Task Scheduler, click on Create Task in the right panel.
+    3. General Settings
+        * ** Name: Give your task a name, e.g., SendScheduledEmails.
+        * ** Security options: Choose Run whether user is logged on or not if you want it to run even when you’re logged out.
+        * ** Check 'Do not store password. This task will only have access to local computer resourses.'
+    4. Trigger
+        * ** Go to the Triggers tab and click New.
+        * ** Set how often you want the task to run (e.g., every 5 minutes, daily, etc.).
+        ### Example for every 5 minutes:
+        - Begin the task: On a schedule
+        - Settings: Select Daily
+        - Recur every: 1 day
+        - Repeat task every: 5 minutes, for a duration of: 1 day (or set how long you want it to run)
+        - Click OK to save.
+    5. Action
+        * ** Go to the Actions tab and click New.
+        * ** Action: Start a program.
+        * ** Program/script: Click Browse and navigate to your php.exe file (e.g., C:\Windows\System32\curl.exe).
+        * ** Add arguments (optional): Add the path to your PHP script, for example: 
+
+```sh
+-X POST http://localhost/assignment/scheduler/send
+``` 
+* ** Click OK to save.
+    6. Save and Test the Task
+        * ** Click OK to save the task.
+
+> Remember inside this "SchedulerController class" we send() method.
