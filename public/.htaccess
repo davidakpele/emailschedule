@@ -1,7 +1,6 @@
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
-        ##Falg for GoDaday hosting
         Options +MultiViews
         Options +FollowSymLinks
     </IfModule>
@@ -34,8 +33,6 @@
     RewriteCond %{QUERY_STRING}  ^task=view$ [NC]
     RewriteRule ^(.*)$ $1? [R=301,L]
 
-    #This condition replace and direct you to the that match ur request url. example is instead of http//www/school/admin/About maybe you mistakely type About.php with extension so this redirect you to about about instead of 404 page only is the request match with any method name.
-    #Redirect from extensions to non-extensions
     RewriteCond %{THE_REQUEST} \s/+(.+?)\.php[\s?] [NC]
     RewriteRule ^ /%1 [R=301,NE,L]
 
