@@ -20,7 +20,7 @@
 
 ## Quick Start
 
-1. Clone the repo: git clone **https://github.com/davidakpele/ipOnlineKyc.git**
+1. Clone the repo: git clone **https://github.com/davidakpele/emailschedule**
 2. Install dependencies using Composer: **composer install**
 3. Set up your web server to point to the **public **directory.
 
